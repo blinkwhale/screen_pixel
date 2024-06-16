@@ -1,7 +1,7 @@
 name: screen_pixel
 description: "A Flutter plugin to get screen resolution on macOS."
 version: 0.0.1
-homepage:
+homepage: https://github.com/blinkwhale/screen_pixel
 
 environment:
   sdk: '>=2.12.0 <4.0.0'
