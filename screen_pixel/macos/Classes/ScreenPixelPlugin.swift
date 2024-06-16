@@ -12,22 +12,17 @@ public class ScreenPixelPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case "getPlatformVersion":
       result("macOS " + ProcessInfo.processInfo.operatingSystemVersionString)
+    case "getResolution":
+      if let screen = NSScreen.main {
+        let width = screen.frame.width
+        let height = screen.frame.height
+        let resolution = ["width": width, "height": height]
+        result(resolution)
+      } else {
+        result(FlutterError(code: "UNAVAILABLE", message: "Screen info unavailable", details: nil))
+      }
     default:
       result(FlutterMethodNotImplemented)
     }
   }
-
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-      if (call.method == "getResolution") {
-        if let screen = NSScreen.main {
-          let width = screen.frame.width
-          let height = screen.frame.height
-          result("\(width) x \(height)")
-        } else {
-          result(FlutterError(code: "UNAVAILABLE", message: "Screen info unavailable", details: nil))
-        }
-      } else {
-        result(FlutterMethodNotImplemented)
-      }
-    }
 }

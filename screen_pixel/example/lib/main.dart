@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  String _screenResolution = 'Unknown';
   final _screenPixelPlugin = ScreenPixel();
 
   @override
@@ -27,14 +27,12 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
+    Map<String, double>? screenResolution;
+
     try {
-      platformVersion =
-          await _screenPixelPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      screenResolution = await _screenPixelPlugin.getResolution();
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      screenResolution = null;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -43,7 +41,12 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      if (screenResolution != null) {
+        _screenResolution =
+        'Width: ${screenResolution['width']}, Height: ${screenResolution['height']}';
+      } else {
+        _screenResolution = 'Failed to get screen resolution.';
+      }
     });
   }
 
@@ -55,7 +58,12 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Screen Resolution: $_screenResolution\n'),
+            ],
+          ),
         ),
       ),
     );

@@ -9,7 +9,7 @@ class MockScreenPixelPlatform
     implements ScreenPixelPlatform {
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<Map<String, double>> getResolution() => Future.value({'width': 1920.0, 'height': 1080.0});
 }
 
 void main() {
@@ -19,11 +19,14 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelScreenPixel>());
   });
 
-  test('getPlatformVersion', () async {
+  test('getResolution', () async {
     ScreenPixel screenPixelPlugin = ScreenPixel();
     MockScreenPixelPlatform fakePlatform = MockScreenPixelPlatform();
     ScreenPixelPlatform.instance = fakePlatform;
 
-    expect(await screenPixelPlugin.getPlatformVersion(), '42');
+    final resolution = await screenPixelPlugin.getResolution();
+    expect(resolution, isA<Map<String, double>>());
+    expect(resolution['width'], 1920.0);
+    expect(resolution['height'], 1080.0);
   });
 }

@@ -11,8 +11,13 @@ void main() {
   setUp(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
       channel,
-      (MethodCall methodCall) async {
-        return '42';
+          (MethodCall methodCall) async {
+        switch (methodCall.method) {
+          case 'getResolution':
+            return {'width': 1920.0, 'height': 1080.0};
+          default:
+            return null;
+        }
       },
     );
   });
@@ -21,7 +26,10 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await platform.getPlatformVersion(), '42');
+  test('getResolution', () async {
+    final resolution = await platform.getResolution();
+    expect(resolution, isA<Map<String, double>>());
+    expect(resolution['width'], 1920.0);
+    expect(resolution['height'], 1080.0);
   });
 }

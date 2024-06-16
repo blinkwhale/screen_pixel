@@ -10,8 +10,14 @@ class MethodChannelScreenPixel extends ScreenPixelPlatform {
   final methodChannel = const MethodChannel('screen_pixel');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  Future<Map<String, double>> getResolution() async {
+    final resolution = await methodChannel.invokeMethod<Map>('getResolution');
+    if (resolution == null) {
+      throw PlatformException(
+        code: 'UNAVAILABLE',
+        message: 'Resolution data unavailable',
+      );
+    }
+    return Map<String, double>.from(resolution);
   }
 }

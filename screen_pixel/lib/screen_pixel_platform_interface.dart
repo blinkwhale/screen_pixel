@@ -23,7 +23,7 @@ abstract class ScreenPixelPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+  Future<Map<String, double>> getResolution() {
+    throw UnimplementedError('getResolution() has not been implemented.');
   }
 }
