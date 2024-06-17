@@ -47,17 +47,31 @@ endfunction()
 
 # Flutter library and tool build rules.
 set(FLUTTER_MANAGED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/flutter")
-add_subdirectory(${FLUTTER_MANAGED_DIR})
+if (EXISTS ${FLUTTER_MANAGED_DIR})
+  add_subdirectory(${FLUTTER_MANAGED_DIR})
+else()
+  message(FATAL_ERROR "Flutter managed directory not found: ${FLUTTER_MANAGED_DIR}")
+endif()
 
 # Application build; see runner/CMakeLists.txt.
-add_subdirectory("runner")
+set(RUNNER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/runner")
+if (EXISTS ${RUNNER_DIR})
+  add_subdirectory(${RUNNER_DIR})
+else()
+  message(FATAL_ERROR "Runner directory not found: ${RUNNER_DIR}")
+endif()
 
 # Enable the test target.
 set(include_screen_pixel_tests TRUE)
 
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
-include(flutter/generated_plugins.cmake)
+set(GENERATED_PLUGINS_CMAKE "${FLUTTER_MANAGED_DIR}/generated_plugins.cmake")
+if (EXISTS ${GENERATED_PLUGINS_CMAKE})
+  include(${GENERATED_PLUGINS_CMAKE})
+else()
+  message(FATAL_ERROR "Generated plugins file not found: ${GENERATED_PLUGINS_CMAKE}")
+endif()
 
 # === Plugin build rules ===
 # Add rules for building the screen_pixel_plugin
