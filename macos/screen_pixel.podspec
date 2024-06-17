@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'screen_pixel'
-  s.version          = '0.0.1'
+  s.version          = '0.0.3'
   s.summary          = 'A Flutter plugin to get screen resolution on macOS.'
   s.description      = <<-DESC
 A Flutter plugin to get screen resolution on macOS.
