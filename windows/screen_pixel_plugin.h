@@ -6,7 +6,7 @@
 
 #include <memory>
 
-namespace {
+namespace screen_pixel {
 
 class ScreenPixelPlugin : public flutter::Plugin {
  public:
@@ -17,12 +17,11 @@ class ScreenPixelPlugin : public flutter::Plugin {
   virtual ~ScreenPixelPlugin();
 
  private:
-  // Called when a method is called on this plugin's channel from Dart.
   void HandleMethodCall(
       const flutter::MethodCall<std::string> &method_call,
       std::unique_ptr<flutter::MethodResult<std::string>> result);
 };
 
-}  // namespace
+}  // namespace screen_pixel
 
 #endif  // FLUTTER_PLUGIN_SCREEN_PIXEL_PLUGIN_H_

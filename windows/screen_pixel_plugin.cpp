@@ -6,7 +6,7 @@
 #include <memory>
 #include <sstream>
 
-namespace {
+namespace screen_pixel {
 
 class ScreenPixelPlugin : public flutter::Plugin {
  public:
@@ -17,7 +17,6 @@ class ScreenPixelPlugin : public flutter::Plugin {
   virtual ~ScreenPixelPlugin();
 
  private:
-  // Called when a method is called on this plugin's channel from Dart.
   void HandleMethodCall(
       const flutter::MethodCall<std::string> &method_call,
       std::unique_ptr<flutter::MethodResult<std::string>> result);
@@ -48,7 +47,6 @@ void ScreenPixelPlugin::HandleMethodCall(
     const flutter::MethodCall<std::string> &method_call,
     std::unique_ptr<flutter::MethodResult<std::string>> result) {
   if (method_call.method_name().compare("getResolution") == 0) {
-    // Get screen resolution.
     RECT desktop;
     const HWND hDesktop = GetDesktopWindow();
     GetWindowRect(hDesktop, &desktop);
@@ -67,11 +65,11 @@ void ScreenPixelPlugin::HandleMethodCall(
   }
 }
 
-}  // namespace
+}  // namespace screen_pixel
 
 void ScreenPixelPluginRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar) {
-  ScreenPixelPlugin::RegisterWithRegistrar(
+  screen_pixel::ScreenPixelPlugin::RegisterWithRegistrar(
       flutter::PluginRegistrarManager::GetInstance()
           ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
 }
