@@ -53,19 +53,27 @@ void ScreenPixelPlugin::HandleMethodCall(
     }
     result->Success(flutter::EncodableValue(version_stream.str()));
   } else if (method_call.method_name().compare("getResolution") == 0) {
-        // Get screen resolution.
-        RECT desktop;
-        const HWND hDesktop = GetDesktopWindow();
-        GetWindowRect(hDesktop, &desktop);
-        int width = desktop.right;
-        int height = desktop.bottom;
+    // Get screen resolution.
+    RECT desktop;
+    const HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
+    int width = desktop.right;
+    int height = desktop.bottom;
 
-        flutter::EncodableMap resolution;
-        resolution[flutter::EncodableValue("width")] = flutter::EncodableValue(static_cast<double>(width));
-        resolution[flutter::EncodableValue("height")] = flutter::EncodableValue(static_cast<double>(height));
-        result->Success(flutter::EncodableValue(resolution));
+    flutter::EncodableMap resolution;
+    resolution[flutter::EncodableValue("width")] = flutter::EncodableValue(static_cast<double>(width));
+    resolution[flutter::EncodableValue("height")] = flutter::EncodableValue(static_cast<double>(height));
+    result->Success(flutter::EncodableValue(resolution));
   } else {
     result->NotImplemented();
   }
 }
+
 }  // namespace screen_pixel
+
+void ScreenPixelPluginRegisterWithRegistrar(
+    FlutterDesktopPluginRegistrarRef registrar) {
+  screen_pixel::ScreenPixelPlugin::RegisterWithRegistrar(
+      flutter::PluginRegistrarManager::GetInstance()
+          ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
+}

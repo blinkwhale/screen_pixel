@@ -23,5 +23,4 @@ flutter:
       macos:
         pluginClass: ScreenPixelPlugin
       windows:
-        pluginClass: ScreenPixelPlugin
-        fileName: screen_pixel_plugin.dll
+        pluginClass: ScreenPixelPluginCApi
