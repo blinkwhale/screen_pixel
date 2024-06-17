@@ -1,6 +1,6 @@
 # screen_pixel
 
-A Flutter plugin to get screen resolution on macOS.
+A Flutter plugin to get screen resolution on macOS and Windows.
 
 ## Getting Started
 
@@ -12,7 +12,7 @@ Add the following line to your `pubspec.yaml` file under `dependencies`:
 
 ```yaml
 dependencies:
-  screen_pixel: ^0.0.1
+  screen_pixel: ^0.0.2
 ```
 
 ### Usage
