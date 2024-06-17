@@ -17,9 +17,10 @@ class ScreenPixelPlugin : public flutter::Plugin {
   virtual ~ScreenPixelPlugin();
 
  private:
+  // Called when a method is called on this plugin's channel from Dart.
   void HandleMethodCall(
-      const flutter::MethodCall<std::string> &method_call,
-      std::unique_ptr<flutter::MethodResult<std::string>> result);
+      const flutter::MethodCall<flutter::EncodableValue> &method_call,
+      std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result);
 };
 
 }  // namespace screen_pixel
