@@ -19,7 +19,7 @@ set(PLUGIN_NAME "screen_pixel_plugin")
 # Any new source files that you add to the plugin should be added here.
 list(APPEND PLUGIN_SOURCES
   "screen_pixel_plugin.cpp"
-  "screen_pixel_plugin.h"
+  "include/screen_pixel/screen_pixel_plugin.h"
 )
 
 # Define the plugin library target. Its name must not be changed (see comment
