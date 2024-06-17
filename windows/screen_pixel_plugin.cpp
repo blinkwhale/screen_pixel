@@ -71,8 +71,3 @@ void ScreenPixelPlugin::HandleMethodCall(
 
 }  // namespace screen_pixel
 
-void ScreenPixelPluginRegisterWithRegistrar(
-    FlutterDesktopPluginRegistrarRef registrar) {
-  screen_pixel::ScreenPixelPlugin::RegisterWithRegistrar(
-      flutter::PluginRegistrarManager::GetInstance()->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
-}
