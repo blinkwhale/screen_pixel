@@ -10,8 +10,6 @@ public class ScreenPixelPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
-    case "getPlatformVersion":
-      result("macOS " + ProcessInfo.processInfo.operatingSystemVersionString)
     case "getResolution":
       if let screen = NSScreen.main {
         let width = screen.frame.width
