@@ -3,14 +3,20 @@
 
 #include <flutter_plugin_registrar.h>
 
-#ifdef __cplusplus
+#ifdef FLUTTER_PLUGIN_IMPL
+#define FLUTTER_PLUGIN_EXPORT __declspec(dllexport)
+#else
+#define FLUTTER_PLUGIN_EXPORT __declspec(dllimport)
+#endif
+
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
-void ScreenPixelPluginCApiRegisterWithRegistrar(
+FLUTTER_PLUGIN_EXPORT void ScreenPixelPluginCApiRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar);
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 }  // extern "C"
 #endif
 

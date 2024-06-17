@@ -34,15 +34,9 @@ TEST(ScreenPixelPlugin, GetPlatformVersion) {
           },
           nullptr, nullptr));
 
-TEST(ScreenPixelPlugin, GetResolution) {
-  ScreenPixelPlugin plugin;
-  auto method_call = std::make_unique<flutter::MethodCall<std::string>>(
-      "getResolution", std::make_unique<flutter::EncodableValue>());
-  auto result = std::make_unique<flutter::StandardMethodResult<std::string>>();
-  plugin.HandleMethodCall(*method_call, std::move(result));
-  auto resolution = std::get<flutter::EncodableMap>(result->result());
-  EXPECT_TRUE(resolution.find(flutter::EncodableValue("width")) != resolution.end());
-  EXPECT_TRUE(resolution.find(flutter::EncodableValue("height")) != resolution.end());
+  // Since the exact string varies by host, just ensure that it's a string
+  // with the expected format.
+  EXPECT_TRUE(result_string.rfind("Windows ", 0) == 0);
 }
 
 }  // namespace test

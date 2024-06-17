@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_pixel/screen_pixel.dart';
 
@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp();
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       if (screenResolution != null) {
         _screenResolution =
-        'Width: ${screenResolution['width']}, Height: ${screenResolution['height']}';
+            'Width: ${screenResolution['width']}, Height: ${screenResolution['height']}';
       } else {
         _screenResolution = 'Failed to get screen resolution.';
       }
