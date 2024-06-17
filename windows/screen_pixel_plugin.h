@@ -16,7 +16,10 @@ class ScreenPixelPlugin : public flutter::Plugin {
 
   virtual ~ScreenPixelPlugin();
 
- private:
+  // Disallow copy and assign.
+  ScreenPixelPlugin(const ScreenPixelPlugin&) = delete;
+  ScreenPixelPlugin& operator=(const ScreenPixelPlugin&) = delete;
+
   // Called when a method is called on this plugin's channel from Dart.
   void HandleMethodCall(
       const flutter::MethodCall<flutter::EncodableValue> &method_call,
